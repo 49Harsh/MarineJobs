@@ -27,6 +27,14 @@ const AdminLayout = () => {
                 Create New Job
               </Link>
             </li>
+            <li>
+              <Link 
+                to="/admin/applications" 
+                className="block py-2 px-4 text-gray-700 hover:bg-blue-50 rounded-md transition"
+              >
+                Applications
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

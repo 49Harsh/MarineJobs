@@ -1,91 +1,113 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useJobContext } from '../../context/JobContext';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import api from '../../api/api';
+import { FileText, Download, Mail, Phone, Globe } from 'lucide-react';
 
 const AdminApplicationsList = () => {
-  const { jobId } = useParams();
-  const navigate = useNavigate();
-  const { state, fetchJobApplications } = useJobContext();
-  const { applications, loading, error } = state;
+    const { jobId } = useParams();
+    const [applications, setApplications] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (jobId) {
-      fetchJobApplications(jobId);
-    }
-  }, [jobId]);
+    useEffect(() => {
+        fetchApplications();
+    }, [jobId]);
 
-  const renderApplicationStatus = (status) => {
-    const statusColors = {
-      'Pending': 'bg-yellow-100 text-yellow-800',
-      'Reviewed': 'bg-blue-100 text-blue-800',
-      'Shortlisted': 'bg-green-100 text-green-800',
-      'Rejected': 'bg-red-100 text-red-800'
+    const fetchApplications = async () => {
+        try {
+            const endpoint = jobId 
+                ? `/admin/jobs/${jobId}/applications`
+                : '/admin/applications';
+                
+            const response = await api.get(endpoint);
+            setApplications(response.data.applications);
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching applications:', err);
+            setError('Failed to fetch applications');
+            setLoading(false);
+        }
     };
 
+    const handleStatusChange = async (applicationId, newStatus) => {
+        try {
+            await api.patch(`/admin/applications/${applicationId}`, { status: newStatus });
+            fetchApplications(); // Refresh the list
+        } catch (err) {
+            setError('Failed to update application status');
+        }
+    };
+
+    if (loading) return <div className="text-center py-8">Loading applications...</div>;
+    if (error) return <div className="text-red-500 text-center py-8">{error}</div>;
+
     return (
-      <span className={`px-2 py-1 rounded text-xs ${statusColors[status]}`}>
-        {status}
-      </span>
+        <div className="container mx-auto px-4">
+            <h2 className="text-2xl font-bold mb-6">Job Applications</h2>
+            <div className="grid gap-6">
+                {applications.map((application) => (
+                    <div key={application._id} className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 className="text-xl font-semibold">{application.fullName}</h3>
+                                <p className="text-gray-600">Applied for: {application.jobId.jobTitle}</p>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <select
+                                    value={application.status}
+                                    onChange={(e) => handleStatusChange(application._id, e.target.value)}
+                                    className="rounded border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                >
+                                    <option value="Pending">Pending</option>
+                                    <option value="Reviewed">Reviewed</option>
+                                    <option value="Shortlisted">Shortlisted</option>
+                                    <option value="Rejected">Rejected</option>
+                                </select>
+                                {application.resumeUrl && (
+                                    <a
+                                        href={`http://localhost:5000${application.resumeUrl}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
+                                    >
+                                        <Download size={20} />
+                                        Resume
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-4 mt-4">
+                            <div className="flex items-center gap-2 text-gray-600">
+                                <Mail size={18} />
+                                <a href={`mailto:${application.email}`} className="hover:text-blue-600">
+                                    {application.email}
+                                </a>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-600">
+                                <Phone size={18} />
+                                <a href={`tel:${application.phoneNumber}`} className="hover:text-blue-600">
+                                    {application.phoneNumber}
+                                </a>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-600">
+                                <Globe size={18} />
+                                {application.nationality}
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-600">
+                                <FileText size={18} />
+                                Source: {application.referralSource}
+                            </div>
+                        </div>
+                        
+                        <div className="mt-4 text-sm text-gray-500">
+                            Applied on: {new Date(application.appliedOn).toLocaleDateString()}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
-  };
-
-  if (loading) return <div className="text-center p-4">Loading applications...</div>;
-  if (error) return <div className="text-red-500 p-4">{error}</div>;
-
-  return (
-    <div className="container mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Job Applications</h1>
-        <button 
-          onClick={() => navigate('/admin/jobs')}
-          className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-        >
-          Back to Jobs
-        </button>
-      </div>
-
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="w-full">
-          <thead className="bg-gray-100 border-b">
-            <tr>
-              <th className="p-3 text-left">Full Name</th>
-              <th className="p-3 text-left">Email</th>
-              <th className="p-3 text-left">Applied On</th>
-              <th className="p-3 text-left">Status</th>
-              <th className="p-3 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {applications.map((application) => (
-              <tr key={application._id} className="border-b hover:bg-gray-50">
-                <td className="p-3">{application.fullName}</td>
-                <td className="p-3">{application.email}</td>
-                <td className="p-3">
-                  {new Date(application.appliedOn).toLocaleDateString()}
-                </td>
-                <td className="p-3">
-                  {renderApplicationStatus(application.status)}
-                </td>
-                <td className="p-3 space-x-2">
-                  <button 
-                    onClick={() => navigate(`/admin/applications/${application._id}`)}
-                    className="text-blue-500 hover:underline"
-                  >
-                    View Details
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {applications.length === 0 && (
-          <div className="text-center p-4 text-gray-500">
-            No applications found for this job
-          </div>
-        )}
-      </div>
-    </div>
-  );
 };
 
 export default AdminApplicationsList;

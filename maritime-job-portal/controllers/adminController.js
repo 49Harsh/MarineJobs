@@ -86,3 +86,45 @@ exports.getApplicationDetails = async (req, res) => {
         res.status(500).json({ message: 'Error fetching application details', error: error.message });
     }
 };
+
+exports.getAllApplications = async (req, res) => {
+    try {
+        const applications = await Application.find()
+            .populate('jobId', 'jobTitle companyName')
+            .sort({ appliedOn: -1 });
+            
+        res.json({ 
+            success: true,
+            count: applications.length,
+            applications 
+        });
+    } catch (error) {
+        console.error('Error in getAllApplications:', error);
+        res.status(500).json({ 
+            success: false,
+            message: 'Error fetching applications', 
+            error: error.message 
+        });
+    }
+};
+
+exports.updateApplicationStatus = async (req, res) => {
+    try {
+        const { applicationId } = req.params;
+        const { status } = req.body;
+        
+        const application = await Application.findByIdAndUpdate(
+            applicationId,
+            { status },
+            { new: true }
+        );
+        
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+        
+        res.json({ message: 'Application status updated', application });
+    } catch (error) {
+        res.status(400).json({ message: 'Error updating application status', error: error.message });
+    }
+};

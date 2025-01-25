@@ -21,6 +21,9 @@ const App = () => {
           <Routes>
             <Route path='/' element={<LandingPages />} />
             <Route path="/vacanciesui" element={<VacanciesUi />} />
+            <Route path="/apply/:jobId" element={<JobApplication />} />
+            
+            {/* Admin Routes */}
             <Route path="/admin" element={<AdminLayout />}>
                 {/* Redirect root admin route to jobs */}
                 <Route index element={<Navigate to="jobs" replace />} />
@@ -31,14 +34,12 @@ const App = () => {
                 <Route path="jobs/edit/:jobId" element={<JobForm />} />
                 
                 {/* Applications Routes */}
+                <Route path="applications" element={<AdminApplicationsList />} /> {/* Move this up */}
                 <Route path="jobs/:jobId/applications" element={<AdminApplicationsList />} />
               </Route>
               
               {/* Catch-all route for undefined paths */}
               <Route path="*" element={<Navigate to="/admin/jobs" replace />} />
-            
-            {/* Job Application Route */}
-            <Route path="/apply/:jobId" element={<JobApplication />} />
           </Routes>
         </ApplicationProvider>
       </JobProvider>
