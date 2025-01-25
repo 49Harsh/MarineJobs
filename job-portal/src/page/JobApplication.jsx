@@ -1,224 +1,184 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useJobContext } from '../context/JobContext';
-import { Building, MapPin, Clock, FileUp } from 'lucide-react';
-import { submitApplication } from '../services/applicationService';
+import { useApplicationContext } from '../context/ApplicationContext';
+import { Ship } from 'lucide-react';
 
 const JobApplication = () => {
-  const { jobId } = useParams();
-  const { state } = useJobContext();
-  const job = state.jobs.find(j => j._id === jobId);
-  const navigate = useNavigate();
+    const { jobId } = useParams();
+    const navigate = useNavigate();
+    const { state: { jobs } } = useJobContext();
+    const { submitApplication, state: appState } = useApplicationContext();
 
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    nationality: '',
-    phoneNumber: '',
-    referralSource: 'Direct',
-    resume: null
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
+    const [formData, setFormData] = useState({
+        jobId: jobId,
+        fullName: '',
+        email: '',
+        phoneNumber: '',
+        nationality: '',
+        referralSource: 'Direct'
     });
-  };
 
-  const handleFileChange = (e) => {
-    setFormData({
-      ...formData,
-      resume: e.target.files[0]
-    });
-  };
+    const [resume, setResume] = useState(null);
+    const [error, setError] = useState('');
+    const job = jobs.find(j => j._id === jobId);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const formDataToSend = new FormData();
-      
-      // Append all form fields
-      Object.keys(formData).forEach(key => {
-        if (key === 'resume' && formData[key]) {
-          formDataToSend.append('resume', formData[key]);
-        } else {
-          formDataToSend.append(key, formData[key]);
+    useEffect(() => {
+        if (!job) {
+            navigate('/vacanciesui');
         }
-      });
+    }, [job, navigate]);
 
-      // Add jobId to formData
-      formDataToSend.append('jobId', jobId);
+    const handleChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
+    };
 
-      const response = await submitApplication(formDataToSend);
-      
-      if (response.success) {
-        alert('Application submitted successfully!');
-        navigate('/jobs'); // Redirect to jobs page
-      } else {
-        throw new Error(response.message || 'Failed to submit application');
-      }
-    } catch (err) {
-      setError(err.message || 'Failed to submit application');
-    } finally {
-      setLoading(false);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
+            setError('File size should not exceed 5MB');
+            return;
+        }
+        setResume(file);
+        setError('');
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError('');
+
+        if (!resume) {
+            setError('Please upload your resume');
+            return;
+        }
+
+        const submitData = new FormData();
+        Object.keys(formData).forEach(key => {
+            submitData.append(key, formData[key]);
+        });
+        submitData.append('resume', resume);
+
+        try {
+            await submitApplication(jobId, submitData);
+            alert('Application submitted successfully!');
+            navigate('/vacanciesui');
+        } catch (err) {
+            setError(err.message || 'Failed to submit application');
+        }
+    };
+
+    if (!job) {
+        return <div className="text-center py-8">Loading...</div>;
     }
-  };
 
-  if (!job) {
-    return <div className="text-center py-8">Job not found</div>;
-  }
+    return (
+        <div className="max-w-2xl mx-auto p-6">
+            <div className="flex items-center mb-8">
+                <Ship className="text-slate-800 mr-3" size={32} />
+                <h1 className="text-3xl font-bold text-gray-900">Apply for {job.jobTitle}</h1>
+            </div>
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Left side - Job Details */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">{job.jobTitle}</h2>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <Building className="w-5 h-5 mr-2 text-gray-600" />
-              <span>{job.companyName}</span>
-            </div>
-            <div className="flex items-center">
-              <MapPin className="w-5 h-5 mr-2 text-gray-600" />
-              <span>{job.location}</span>
-            </div>
-            <div className="flex items-center">
-              <Clock className="w-5 h-5 mr-2 text-gray-600" />
-              <span>Experience: {job.experience}</span>
-            </div>
-            <div className="mt-4">
-              <h3 className="font-semibold mb-2">Job Description</h3>
-              <p className="text-gray-600 whitespace-pre-line">{job.jobDescription}</p>
-            </div>
-          </div>
+            {(error || appState.error) && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {error || appState.error}
+                </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input
+                        type="tel"
+                        name="phoneNumber"
+                        value={formData.phoneNumber}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Nationality</label>
+                    <input
+                        type="text"
+                        name="nationality"
+                        value={formData.nationality}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Referral Source</label>
+                    <select
+                        name="referralSource"
+                        value={formData.referralSource}
+                        onChange={handleChange}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    >
+                        <option value="LinkedIn">LinkedIn</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Referral">Referral</option>
+                        <option value="Direct">Direct</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">Resume (PDF/DOC/DOCX, max 5MB)</label>
+                    <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileChange}
+                        required
+                        className="mt-1 block w-full text-sm text-gray-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-md file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-blue-50 file:text-blue-700
+                        hover:file:bg-blue-100"
+                    />
+                </div>
+
+                <button
+                    type="submit"
+                    disabled={appState.loading}
+                    className="w-full bg-slate-800 text-white py-2 px-4 rounded hover:bg-slate-700 
+                             transition-colors duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                >
+                    {appState.loading ? 'Submitting...' : 'Submit Application'}
+                </button>
+            </form>
         </div>
-
-        {/* Right side - Application Form */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Apply for this position</h2>
-          {error && (
-            <div className="bg-red-50 text-red-500 p-4 rounded mb-4">{error}</div>
-          )}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Nationality
-              </label>
-              <input
-                type="text"
-                name="nationality"
-                value={formData.nationality}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                name="phoneNumber"
-                value={formData.phoneNumber}
-                onChange={handleInputChange}
-                required
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                How did you hear about us?
-              </label>
-              <select
-                name="referralSource"
-                value={formData.referralSource}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="Direct">Direct</option>
-                <option value="LinkedIn">LinkedIn</option>
-                <option value="Facebook">Facebook</option>
-                <option value="Referral">Referral</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Resume
-              </label>
-              <div className="flex items-center space-x-2">
-                <label className="cursor-pointer bg-gray-50 px-4 py-2 rounded border hover:bg-gray-100">
-                  <FileUp className="inline-block w-5 h-5 mr-2" />
-                  Upload Resume
-                  <input
-                    type="file"
-                    name="resume"
-                    onChange={handleFileChange}
-                    accept=".pdf,.doc,.docx"
-                    className="hidden"
-                    required
-                  />
-                </label>
-                {formData.resume && (
-                  <span className="text-sm text-gray-600">
-                    {formData.resume.name}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:bg-blue-300"
-            >
-              {loading ? 'Submitting...' : 'Submit Application'}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default JobApplication;

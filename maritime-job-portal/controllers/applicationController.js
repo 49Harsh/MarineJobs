@@ -61,6 +61,12 @@ exports.getJobDetails = async (req, res) => {
 exports.createApplication = async (req, res) => {
     try {
         const applicationData = req.body;
+        
+        // Add resume URL if file was uploaded
+        if (req.file) {
+            applicationData.resumeUrl = `/uploads/resumes/${req.file.filename}`;
+        }
+
         const newApplication = new Application(applicationData);
         await newApplication.save();
 

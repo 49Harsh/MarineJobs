@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maritime Job Application Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+        }
+        label {
+            font-weight: bold;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Maritime Job Application Form</h1>
+    
+    <form id="applicationForm">
+        <div>
+            <label for="jobId">Job ID:</label>
+            <input type="text" id="jobId" name="jobId" required>
+        </div>
+
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="nationality">Nationality:</label>
+            <input type="text" id="nationality" name="nationality" required>
+        </div>
+
+        <div>
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+        </div>
+
+        <div>
+            <label for="referralSource">Referral Source:</label>
+            <select id="referralSource" name="referralSource" required>
+                <option value="LinkedIn">LinkedIn</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Referral">Referral</option>
+                <option value="Direct">Direct</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="resume">Resume (PDF/DOC/DOCX):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+        </div>
+
+        <button type="submit">Submit Application</button>
+    </form>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('applicationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            const formElements = e.target.elements;
+
+            // Add all form fields to FormData
+            formData.append('jobId', formElements.jobId.value);
+            formData.append('fullName', formElements.fullName.value);
+            formData.append('email', formElements.email.value);
+            formData.append('nationality', formElements.nationality.value);
+            formData.append('phoneNumber', formElements.phoneNumber.value);
+            formData.append('referralSource', formElements.referralSource.value);
+            formData.append('resume', formElements.resume.files[0]);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/applications', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                const responseDiv = document.getElementById('response');
+                responseDiv.style.display = 'block';
+                responseDiv.style.backgroundColor = response.ok ? '#dff0d8' : '#f2dede';
+                responseDiv.innerHTML = `<p>${JSON.stringify(result, null, 2)}</p>`;
+
+                if(response.ok) {
+                    e.target.reset();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('response').innerHTML = `<p>Error: ${error.message}</p>`;
+                document.getElementById('response').style.display = 'block';
+                document.getElementById('response').style.backgroundColor = '#f2dede';
+            }
+        });
+    </script>
+</body>
+</html>
