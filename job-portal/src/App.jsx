@@ -11,6 +11,9 @@ import JobForm from './page/admin/JobForm';
 import { JobProvider } from './context/JobContext'; // Import JobProvider
 import JobApplication from './page/JobApplication'; // Import JobApplication
 import { ApplicationProvider } from './context/ApplicationContext'; // Import ApplicationProvider
+import About from './page/about/About';
+import AboutTeam from './page/about/AboutTeam';
+import Services from './page/Services';
 
 const App = () => {
   return (
@@ -19,8 +22,12 @@ const App = () => {
       <JobProvider> {/* Wrap Routes with JobProvider */}
         <ApplicationProvider> {/* Wrap Routes with ApplicationProvider */}
           <Routes>
+            {/* Public Routes */}
             <Route path='/' element={<LandingPages />} />
             <Route path="/vacanciesui" element={<VacanciesUi />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/about-team" element={<AboutTeam />} />
+            <Route path="/services" element={<Services />} />
             <Route path="/apply/:jobId" element={<JobApplication />} />
             
             {/* Admin Routes */}
@@ -38,8 +45,8 @@ const App = () => {
                 <Route path="jobs/:jobId/applications" element={<AdminApplicationsList />} />
               </Route>
               
-              {/* Catch-all route for undefined paths */}
-              <Route path="*" element={<Navigate to="/admin/jobs" replace />} />
+              {/* Update catch-all route to go to home page instead of admin */}
+              <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </ApplicationProvider>
       </JobProvider>
