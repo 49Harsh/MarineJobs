@@ -1,23 +1,52 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Menu, X, Ship, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
+  const servicesDropdownRef = useRef(null);
+  const servicesButtonRef = useRef(null);
   const timeoutRef = useRef(null);
   const navigate = useNavigate();
 
+  const handleAboutClick = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    setIsAboutDropdownOpen(!isAboutDropdownOpen);
+  };
+
+  const handleServicesClick = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    setIsServicesDropdownOpen(!isServicesDropdownOpen);
+  };
+
+  const handleItemClick = (path) => {
+    // First navigate
+    navigate(path);
+    
+    // Then close menus after a small delay
+    setTimeout(() => {
+      setIsMenuOpen(false);
+      if (window.innerWidth < 768) {
+        setIsAboutDropdownOpen(false);
+        setIsServicesDropdownOpen(false);
+      }
+    }, 100);
+  };
+
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        dropdownRef.current && 
-        !dropdownRef.current.contains(event.target) &&
-        !buttonRef.current.contains(event.target)
-      ) {
+      // Only close if clicking outside the dropdown and not on a navigation button
+      if (!event.target.closest('.dropdown-container') && 
+          !event.target.closest('.nav-button')) {
         setIsAboutDropdownOpen(false);
+        setIsServicesDropdownOpen(false);
       }
     }
 
@@ -43,10 +72,43 @@ const Navbar = () => {
     }, 100);
   };
 
+  const handleServicesMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsServicesDropdownOpen(true);
+  };
+
+  const handleServicesMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsServicesDropdownOpen(false);
+    }, 100);
+  };
+
   const handleNavigation = (path) => {
     navigate(path);
     setIsMenuOpen(false);
     setIsAboutDropdownOpen(false);
+    setIsServicesDropdownOpen(false);
+  };
+
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    },
+    open: {
+      opacity: 1,
+      height: "auto",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
   };
 
   return (
@@ -70,7 +132,7 @@ const Navbar = () => {
             
             {/* About dropdown */}
             <div 
-              className="relative" 
+              className="relative dropdown-container" 
               ref={dropdownRef}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
@@ -78,25 +140,25 @@ const Navbar = () => {
               <button 
                 ref={buttonRef}
                 className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
+                onClick={handleAboutClick}
               >
-                About <ChevronDown className="ml-1" size={16} />
+                About <ChevronDown className={`ml-1 transform transition-transform ${isAboutDropdownOpen ? 'rotate-180' : ''}`} size={16} />
               </button>
               
               {isAboutDropdownOpen && (
                 <div 
-                  className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 z-50"
+                  className="absolute left-0 mt-2 w-48 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 z-50 dropdown-container"
                 >
                   <div className="py-1">
                     <button
-                      className="block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
-                      onClick={() => handleNavigation('/about')}
+                      className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
+                      onClick={() => handleItemClick('/about')}
                     >
                       About Us
                     </button>
                     <button
-                      className="block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
-                      onClick={() => handleNavigation('/about-team')}
+                      className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
+                      onClick={() => handleItemClick('/about-team')}
                     >
                       About Team
                     </button>
@@ -105,12 +167,53 @@ const Navbar = () => {
               )}
             </div>
 
-            <button 
+            {/* Services dropdown */}
+            <div 
+              className="relative dropdown-container" 
+              ref={servicesDropdownRef}
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+            >
+              <button 
+                ref={servicesButtonRef}
+                className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
+                onClick={handleServicesClick}
+              >
+                Services <ChevronDown className={`ml-1 transform transition-transform ${isServicesDropdownOpen ? 'rotate-180' : ''}`} size={16} />
+              </button>
+              
+              {isServicesDropdownOpen && (
+                <div 
+                  className="absolute left-0 mt-2 w-64 rounded-md shadow-lg bg-slate-800 ring-1 ring-black ring-opacity-5 z-50 dropdown-container"
+                >
+                  <div className="py-1">
+                    {[
+                      { title: 'Crew Management', path: '/services/crew-management' },
+                      { title: 'Technical Management', path: '/services/technical-management' },
+                      { title: 'Consultancy Services', path: '/services/consultancy' },
+                      { title: 'Commercial Management', path: '/services/commercial-management' },
+                      { title: 'Documentation', path: '/services/documentation' },
+                      { title: 'Ship Agency', path: '/services/ship-agency' }
+                    ].map((service) => (
+                      <button
+                        key={service.path}
+                        className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
+                        onClick={() => handleItemClick(service.path)}
+                      >
+                        {service.title}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* <button 
               className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
               onClick={() => handleNavigation('/services')}
             >
               Services
-            </button>
+            </button> */}
             
             <button 
               className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
@@ -140,58 +243,121 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/');
-            }}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial="closed"
+            animate="open"
+            exit="closed"
+            variants={menuVariants}
+            className="md:hidden overflow-hidden bg-slate-800"
           >
-            Home
-          </button>
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/about');
-            }}
-          >
-            About Us
-          </button>
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/about-team');
-            }}
-          >
-            About Team
-          </button>
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/services');
-            }}
-          >
-            Services
-          </button>
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/vacanciesui');
-            }}
-          >
-            Maritime Vacancies
-          </button>
-          <button
-            className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-            onClick={() => {
-              handleNavigation('/contact');
-            }}
-          >
-            Contact Us
-          </button>
-        </div>
-      </div>
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <button
+                className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                onClick={() => {
+                  handleNavigation('/');
+                }}
+              >
+                Home
+              </button>
+
+              {/* Mobile About Dropdown */}
+              <div>
+                <button
+                  className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left flex items-center justify-between"
+                  onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+                >
+                  About
+                  <ChevronDown className={`transform transition-transform ${isMobileAboutOpen ? 'rotate-180' : ''}`} size={16} />
+                </button>
+                <AnimatePresence>
+                  {isMobileAboutOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="pl-4"
+                    >
+                      <button
+                        className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                        onClick={() => {
+                          handleNavigation('/about');
+                        }}
+                      >
+                        About Us
+                      </button>
+                      <button
+                        className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                        onClick={() => {
+                          handleNavigation('/about-team');
+                        }}
+                      >
+                        About Team
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {/* Mobile Services Dropdown */}
+              <div>
+                <button
+                  className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left flex items-center justify-between"
+                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                >
+                  Services
+                  <ChevronDown className={`transform transition-transform ${isMobileServicesOpen ? 'rotate-180' : ''}`} size={16} />
+                </button>
+                <AnimatePresence>
+                  {isMobileServicesOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="pl-4"
+                    >
+                      {[
+                        { title: 'Crew Management', path: '/services/crew-management' },
+                        { title: 'Technical Management', path: '/services/technical-management' },
+                        { title: 'Consultancy Services', path: '/services/consultancy' },
+                        { title: 'Commercial Management', path: '/services/commercial-management' },
+                        { title: 'Documentation', path: '/services/documentation' },
+                        { title: 'Ship Agency', path: '/services/ship-agency' }
+                      ].map((service) => (
+                        <button
+                          key={service.path}
+                          className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                          onClick={() => handleNavigation(service.path)}
+                        >
+                          {service.title}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <button
+                className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                onClick={() => {
+                  handleNavigation('/vacanciesui');
+                }}
+              >
+                Maritime Vacancies
+              </button>
+              <button
+                className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
+                onClick={() => {
+                  handleNavigation('/contact');
+                }}
+              >
+                Contact Us
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

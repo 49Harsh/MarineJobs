@@ -13,7 +13,14 @@ import JobApplication from './page/JobApplication'; // Import JobApplication
 import { ApplicationProvider } from './context/ApplicationContext'; // Import ApplicationProvider
 import About from './page/about/About';
 import AboutTeam from './page/about/AboutTeam';
-import Services from './page/Services';
+import {
+  CrewManagement,
+  TechnicalManagement,
+  ConsultancyServices,
+  CommercialManagement,
+  Documentation,
+  ShipAgency
+} from './page/services';
 
 const App = () => {
   return (
@@ -27,7 +34,6 @@ const App = () => {
             <Route path="/vacanciesui" element={<VacanciesUi />} />
             <Route path="/about" element={<About />} />
             <Route path="/about-team" element={<AboutTeam />} />
-            <Route path="/services" element={<Services />} />
             <Route path="/apply/:jobId" element={<JobApplication />} />
             
             {/* Admin Routes */}
@@ -47,6 +53,14 @@ const App = () => {
               
               {/* Update catch-all route to go to home page instead of admin */}
               <Route path="*" element={<Navigate to="/" replace />} />
+
+              {/* Service Routes */}
+              <Route path="/services/crew-management" element={<CrewManagement />} />
+              <Route path="/services/technical-management" element={<TechnicalManagement />} />
+              <Route path="/services/consultancy" element={<ConsultancyServices />} />
+              <Route path="/services/commercial-management" element={<CommercialManagement />} />
+              <Route path="/services/documentation" element={<Documentation />} />
+              <Route path="/services/ship-agency" element={<ShipAgency />} />
           </Routes>
         </ApplicationProvider>
       </JobProvider>
