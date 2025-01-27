@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,38 +11,43 @@ const services = [
     id: "01",
     title: "Technical Management",
     description: "Operating a vessel efficiently in compliance with environmental, statutory requirements today requires a wide scope of expertise and experience. We endeavour to operate all managed vessels in the safest and most efficient manner possible, aiding our principals to achieve cost economies.",
-    image: "/ship-3.jpg"
+    image: "/landing-01.jpg",
+    url: "/technical-management"
   },
   {
     id: "02",
     title: "Crew Management Services",
     description: "Professional crew management is one of our core activities. We provide fully trained and qualified officers and ratings for all types of vessels including tankers, bulk carriers, and specialized vessels.",
-    image: "/ship-2.jpg"
+    image: "/ship-2.jpg",
+    url: "/crew-management"
   },
   {
     id: "03",
     title: "Marine Consultancy",
     description: "Our experienced team provides comprehensive marine consultancy services including pre-purchase inspections, condition surveys, and operational audits.",
-    image: "/boat-1.jpg"
+    image: "/landing-02.jpg",
+    url: "/marine-consultancy"
   },
   {
     id: "04",
     title: "Safety Management",
     description: "We maintain the highest standards of safety across our fleet through rigorous implementation of safety management systems and regular training.",
-    image: "/ship-3.jpg"
+    image: "/landing-03.jpg",
+    url: "/#"
   },
-  {
-    id: "05",
-    title: "Commercial Operations",
-    description: "Our commercial operations team provides comprehensive support for vessel chartering, voyage planning, and operational optimization.",
-    image: "/ship-2.jpg"
-  },
-  {
-    id: "06",
-    title: "Quality Assurance",
-    description: "We maintain stringent quality standards across all operations, ensuring compliance with international regulations and industry best practices.",
-    image: "/boat-1.jpg"
-  }
+  // {
+  //   id: "05",
+  //   title: "Commercial Operations",
+  //   description: "Our commercial operations team provides comprehensive support for vessel chartering, voyage planning, and operational optimization.",
+  //   image: "/ship-2.jpg"
+  // },
+  // {
+  //   id: "05",
+  //   title: "Quality Assurance",
+  //   description: "We maintain stringent quality standards across all operations, ensuring compliance with international regulations and industry best practices.",
+  //   image: "/ship-2.jpg",
+  //   url: "#"
+  // }
 ];
 
 const ShipManagementSection = () => {
@@ -100,7 +106,7 @@ const ShipManagementSection = () => {
           <div className="lg:w-[45%]" ref={leftSectionRef}>
             <div className="bg-[#1a56db] text-white p-12 rounded-xl">
               <h4 className="text-xl font-medium mb-4">
-                How Columbia Aurus Helps
+                How Run Marine Services Pvt.Ltd. Helps
               </h4>
               <h2 className="text-4xl xl:text-5xl font-bold mb-8 leading-tight">
                 Ship Management and Marine Services Provider
@@ -113,10 +119,10 @@ const ShipManagementSection = () => {
                   Each ship owner is different with their own unique needs. We work as their extended office in India as one team, with the same transparency, philosophy, and dedication enabling tailor-made services to meet client requirements.
                 </p>
               </div>
-              <button className="mt-8 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg inline-flex items-center gap-2 transition-colors text-lg">
+              {/* <button className="mt-8 bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-lg inline-flex items-center gap-2 transition-colors text-lg">
                 View All
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </button> */}
             </div>
           </div>
 
@@ -146,10 +152,12 @@ const ShipManagementSection = () => {
                     <p className="text-gray-600 text-lg mb-6">
                       {service.description}
                     </p>
-                    <button className="text-orange-500 hover:text-orange-600 font-medium flex items-center gap-2 text-lg transition-colors">
+                   <Link to="/about">
+                   <button className="text-orange-500 hover:text-orange-600 font-medium flex items-center gap-2 text-lg transition-colors">
                       Know More
                       <ArrowRight className="w-5 h-5" />
                     </button>
+                   </Link>
                   </div>
                 </div>
               ))}

@@ -13,7 +13,7 @@ const LandingPages = () => {
       <WhoWeAre />
       <ShipManagementSection />
       <CareerSection />
-      <NewsSection />
+      {/* <NewsSection /> */}
       <Footer />
     </div>
   )

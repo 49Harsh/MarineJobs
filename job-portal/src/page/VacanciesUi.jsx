@@ -50,7 +50,7 @@ const VacanciesUi = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex items-center mb-8">
         <Ship className="text-slate-800 mr-3" size={32} />
-        <h1 className="text-3xl font-bold text-gray-900">Maritime Positions</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Maritime Vacancies</h1>
       </div>
       
       {error ? (

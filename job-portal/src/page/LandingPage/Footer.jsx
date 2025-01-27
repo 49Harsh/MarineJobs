@@ -32,7 +32,6 @@ const Footer = () => {
         "About Us",
         "Leadership Team",
         "Vision & Mission",
-        "News Room",
         "Contact Us"
       ]
     },
@@ -41,10 +40,8 @@ const Footer = () => {
       links: [
         "Technical Management",
         "Crew Management",
-        "Payroll & Tax Management",
-        "Technical Services",
-        "Sustainable Development (Green Recycling)",
-        "Chartering"
+        "Technical Services"
+        
       ]
     },
     {
@@ -69,14 +66,15 @@ const Footer = () => {
           {/* Logo and Address Section */}
           <motion.div variants={itemVariants} className="space-y-4">
             <img 
-              src="/path-to-logo.png" 
-              alt="Columbia Aurus Ship Management" 
-              className="h-16 w-auto"
+              src="/logo.jpg" 
+              alt="RUN MARINE SERVICE PVT.LTD" 
+              className="h-10 w-auto"
             />
             <p className="text-sm leading-relaxed">
-              101, Midas Chambers,<br />
-              Fun Republic Lane, Off Link Road,<br />
-              Andheri (West), Mumbai - 53, India.
+              Office No -304, 3rd floor Krishna,<br />
+              Govind tower, sector-24
+              Vashi, opp. Sanpada Railway Station,<br />
+              Navi Mumbai-400705, India.
             </p>
             <div className="flex space-x-4 pt-4">
               <a href="#" className="bg-white p-2 rounded-full hover:bg-gray-200 transition-colors">
@@ -122,13 +120,13 @@ const Footer = () => {
           className="mt-12 pt-4 border-t border-blue-400"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-sm text-gray-300">
-            <p>Copyright © 2025 | All rights reserved | Columbia Aurus Ship Management Pvt. Ltd.</p>
-            <div className="flex items-center space-x-4">
+            <p>Copyright © 2025 | All rights reserved | Run Marine Services Pvt. Ltd.</p>
+            {/* <div className="flex items-center space-x-4">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <span>|</span>
               <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
-            </div>
-            <p className="text-xs">Designed by Webcraft India</p>
+            </div> */}
+            <p className="text-xs">Designed by HY</p>
           </div>
         </motion.div>
 

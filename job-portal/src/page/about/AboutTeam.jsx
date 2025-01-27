@@ -5,40 +5,21 @@ import Footer from '../LandingPage/Footer';
 const AboutTeam = () => {
     const teamMembers = [
         {
-          name: 'Capt. Sudeep Awasthi',
+          name: 'Mr. Nagaraj P. Somasi',
           role: 'Managing Director',
           image: '/ship-2.jpg'
         },
         {
-          name: 'Srinivasan Aravamudhan',
-          role: 'Director - Finance',
+          name: 'Director – Mr. Gauri Shankar',
+          role: 'Director',
           image: '/ship-2.jpg'
         },
         {
-          name: 'Francisco DeSales',
-          role: 'Director - Mainfleet',
+          name: 'Capt.Sailesh Kumar Singh',
+          role: 'Operational Manager ',
           image: '/ship-2.jpg'
         },
-        {
-          name: 'Santosh Mishra',
-          role: 'Director - Offshare',
-          image: '/ship-2.jpg'
-        },
-        {
-          name: 'Jehangir Sethna',
-          role: 'General Manager - Oil & Gas',
-          image: '/ship-2.jpg'
-        },
-        {
-          name: 'Belinda D\'Souza',
-          role: 'Sr. Corporate Manager',
-          image: '/ship-2.jpg'
-        },
-        {
-          name: 'Amit Dhanaki',
-          role: 'General Manager - Finance',
-          image: '/ship-2.jpg'
-        }
+       
       ];
 
   const controls = useAnimation();
@@ -79,16 +60,16 @@ const AboutTeam = () => {
       <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-t from-indigo-100/30 to-transparent" />
       
       <div className="relative py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <span className="text-blue-600 text-sm font-semibold tracking-wider uppercase mb-3 block">
+            {/* <span className="text-blue-600 text-sm font-semibold tracking-wider uppercase mb-3 block">
               Our Team
-            </span>
+            </span> */}
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               Leadership Team
             </h2>
@@ -104,7 +85,7 @@ const AboutTeam = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center place-content-center"
           >
             {teamMembers.map((member, index) => (
               <motion.div
@@ -148,7 +129,7 @@ const AboutTeam = () => {
                       </p>
 
                       {/* Social Links */}
-                      <div className="flex justify-center gap-3">
+                      {/* <div className="flex justify-center gap-3">
                         {[
                           { name: 'LinkedIn', icon: 'IN' },
                           { name: 'Email', icon: '@' }
@@ -162,7 +143,7 @@ const AboutTeam = () => {
                             </span>
                           </button>
                         ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

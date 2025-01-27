@@ -11,7 +11,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-4xl font-bold text-gray-900 mb-20 text-center"
         >
-          About Mahadeva Shipping
+          About Run Marine Services Private Limited
         </motion.h1>
         
         {/* Common section styling */}
@@ -36,19 +36,8 @@ const About = () => {
             <div className="lg:w-1/2 bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-xl flex flex-col justify-center"> {/* Added flex and justify-center */}
               <div className="prose prose-lg max-w-none">
                 <p className="leading-relaxed text-gray-700">
-                  In 2010, Mahadeva Shipping & Management Pvt. 
-                  Ltd was established through successful in crew manning by 
-                  Company’s Directors efforts and all staff of Mahadeva Shipping & 
-                  Management Pvt. Ltd. Pre mains actively involved in the day to day 
-                  operations of the company activity of crewing and other business. Mahadeva 
-                  Shipping & Management Pvt. Ltd. firmly believes in “people”, “Leadership” and “Technical Excellence” as the foundation of reliable and effective 
-                  service. As a result, the group has grown steadily over the years and been rewarded with ever increasing employee loyalty. 
-                  In selection of both sea and shore based staff, Mahadeva Shipping & Management Pvt. Ltd maintains an industry leading standard of recruitment and training; developing staff in a 
-                  friendly, inter-active working environment, geared towards continuous improvement.
-                  Whilst providing complete crews for Ship operators / Owners / Managers fleet of vessels under our Crewing Agent as they are left almost entirely 
-                  absent from the picture. Most important, safety always comes first. We take responsibility for the environment and our surroundings because we want to protect our planet for future generations. Responsibility also means honesty and 
-                  trustworthiness. We expect all our people to do right thing and never to accept unethical or questionable business practices. We manage significant values on behalf of our customers. We take responsibility for the job being done in a professional, 
-                  cost-effective manner that preserves their assets and reputation. We also guarantee first-class training for our employees.
+                Welcome to Run Marine Services, a crewing and manning shipping company based out of Sanpada, Navi Mumbai. We specialize in providing highly skilled and qualified seafarers to the maritime industry worldwide. Our team comprises of experienced professionals with a deep understanding of the shipping industry and a passion for delivering exceptional services to our clients. We have a proven track record of providing reliable and efficient crewing solutions to various types of vessels including bulk carriers, tankers, offshore vessels, and more. At Run Marine, we are committed to ensuring the safety, welfare, and well-being of our seafarers while also providing them with ample opportunities for career growth and development. We take pride in our ability to deliver customized solutions that cater to the unique needs of each of our clients. With a strong focus on quality, safety, and compliance, we aim to be the preferred crewing partner for ship owners and operators worldwide.
+
                 </p>
               </div>
             </div>
@@ -75,8 +64,10 @@ const About = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
               <div className="prose prose-lg max-w-none">
                 <p className="leading-relaxed text-gray-700">
-                  "To be a global maritime services provider, through a principal value based approach to our customer, and by bringing together a diverse cross-section of people from different aspects and united in purpose while striving for harmony in elements through ingenuity of human endeavour”. We want to be a long term partners for our customers, a home for our people and to make a difference in the community. We don’t see any contradiction in running a healthy business but at the same time being socially responsible.
-                  We want to improve people’s lives. In the countries where we work, we are a provider for our employees, their families and the local society. We provide challenging work and excellent career prospects for our people, but we also want it to be fun. Ultimately, our success is our customer’s success. As long-term partners we work closely with them and strive for innovation and improvements.
+                Our mission at Run Marine is to provide our clients with highly skilled and qualified seafarers who are committed to safety, efficiency, and professionalism. We aim to exceed our clients' expectations by delivering customized and 
+                flexible solutions that cater to their unique needs. We are committed to ensuring the welfare and well-being of our seafarers by providing them with a safe, supportive, and rewarding work environment. We strive to continuously improve 
+                our services and processes through innovation,  technology,  and  a  culture  of  continuous  learning.  Our  mission  is  to  be  a  responsible corporate citizen 
+                by contributing to the sustainable development of the maritime industry and the communities in which we operate.
                 </p>
               </div>
             </div>
@@ -103,8 +94,7 @@ const About = () => {
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Vision</h2>
               <div className="prose prose-lg max-w-none">
                 <p className="leading-relaxed text-gray-700">
-                  Company is dedicated to achieve its corporate vision to exceed the customer’s expectations, to deliver exceptional values, and to impart lasting values of integrity, loyalty, and professionalism through the attributes of: Service Harmony Achievement Responsibility Enthusiasm. We know that our entire existence is depending on that we have customers who find our services better than the competition. We want to be an important partner for our customers, making sure that services we provide are adding value for our customers. We simply want to give that little bit extra that put our customers ahead of their competition. We aim to be a key partner for our customers and that our services add significant value for them. We want to give that little bit extra that’ll put them ahead of their game.
-                  Responsibility: We believe that we will continue to grow and strengthen our position as long as we always aim to deliver the best. Because when it comes down to it: It’s all About People!
+                Our vision at Run Marine is to be the leading provider of crewing and manning solutions in the maritime industry worldwide. We strive to build long-term relationships with our clients based on trust, integrity, and mutual respect. We envision a future where our seafarers are recognized as skilled professionals who are valued for their contributions to the safe and efficient operation of vessels, and where Run Marine is recognized as a trusted and reliable partner in the shipping industry.
                 </p>
               </div>
             </div>
@@ -122,16 +112,28 @@ const About = () => {
           <div className="space-y-3">
             <p className="flex items-start">
               <span className="font-semibold min-w-[100px]">Address:</span>
-              <span>M/S Sairama Real Estate, Shop No.6, Plot 3A, Sector 2, Kharghar Navi Mumbai, Maharashtra, India 410210.</span>
+              <span>Office No -304, 3rd floor Krishna Govind tower, sector-24
+                  Vashi, opp. Sanpada Railway Station, Navi Mumbai-4007005, India.
+              </span>
             </p>
             <p className="flex items-center">
               <span className="font-semibold min-w-[100px]">Phone:</span>
-              <a href="tel:+912279622990" className="text-blue-600 hover:text-blue-800">+91 22 79622990</a>
+              <a href="tel:+912279622990" className="text-blue-600 hover:text-blue-800">+91-8080343416</a>
             </p>
             <p className="flex items-center">
               <span className="font-semibold min-w-[100px]">Email:</span>
-              <a href="mailto:info@mahadevashipping.com" className="text-blue-600 hover:text-blue-800">info@mahadevashipping.com</a>
+              <a href="operations@runmarineservice.com" className="text-blue-600 hover:text-blue-800">operations@runmarineservice.com</a>
+
+              <span className='w-4'>,</span>
+              
+              <br/>
+              <p className="flex items-center">
+              {/* <span className="font-semibold min-w-[100px]">Email:</span> */}
+              <a href="runmarine507@gmail.com" className="text-blue-600 hover:text-blue-800">runmarine507@gmail.com</a>
             </p>
+            </p>
+            
+           
           </div>
         </motion.div>
       </div>

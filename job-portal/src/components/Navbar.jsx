@@ -117,8 +117,10 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo section */}
           <div className="flex-shrink-0 flex items-center">
-            <Ship className="text-white mr-2" size={24} />
-            <span className="text-white text-xl font-bold">MarineJobs</span>
+            <img src="/logo.jpg" alt="logo" className="h-10 w-10 rounded-full mx-10"
+
+            />
+            <span className="text-white text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
           </div>
 
           {/* Desktop menu */}
@@ -160,7 +162,7 @@ const Navbar = () => {
                       className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
                       onClick={() => handleItemClick('/about-team')}
                     >
-                      About Team
+                      Leadership Team
                     </button>
                   </div>
                 </div>
@@ -193,7 +195,7 @@ const Navbar = () => {
                       { title: 'Consultancy Services', path: '/services/consultancy' },
                       { title: 'Commercial Management', path: '/services/commercial-management' },
                       { title: 'Documentation', path: '/services/documentation' },
-                      { title: 'Ship Agency', path: '/services/ship-agency' }
+                      {/* { title: 'Ship Agency', path: '/services/ship-agency' } */}
                     ].map((service) => (
                       <button
                         key={service.path}

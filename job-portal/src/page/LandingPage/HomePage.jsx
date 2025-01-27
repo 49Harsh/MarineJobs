@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const carouselData = [
   {
-    title: "TRAVEL & LOGISTIC ARRANGEMENTS",
-    description: "An IATA licensed business division, offering specialized travel and logistics solutions tailored for both maritime and corporate needs.",
+    title: "RUN MARINE SERVICES PRIVATE LIMITED",
+    description: "",
     buttonText: "Know More",
-    bgImage: "/boat-1.jpg"
+    bgImage: "/landing-02.jpg"
   },
   {
-    title: "GLOBAL SHIPPING SERVICES",
-    description: "Comprehensive shipping solutions with worldwide coverage, ensuring reliable and efficient cargo transportation across continents.",
+    title: "RUN MARINE SERVICES PRIVATE LIMITED",
+    description: "",
     buttonText: "Learn More",
-    bgImage: "/ship-2.jpg"
+    bgImage: "landing-01.jpg"
   },
   {
-    title: "CORPORATE TRAVEL SOLUTIONS",
-    description: "Dedicated corporate travel management services designed to streamline your business travel needs with personalized attention.",
-    buttonText: "Explore More",
-    bgImage: "/ship-3.jpg"
+    title: "RUN MARINE SERVICES PRIVATE LIMITED",
+    description: "",
+    buttonText: "Know More",
+    bgImage: "landing-03.jpg"
   }
 ];
 
@@ -72,9 +73,11 @@ const HomePage = () => {
                   </p>
                   
                   {/* Button */}
-                  <button className="bg-white text-gray-900 px-6 py-3 text-sm font-semibold shadow-lg hover:bg-gray-100 transition-colors">
-                    {slide.buttonText}
-                  </button>
+                  <Link to="/about">
+                    <button className="bg-white text-gray-900 px-6 py-3 text-sm font-semibold shadow-lg hover:bg-gray-100 transition-colors">
+                      {slide.buttonText}
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

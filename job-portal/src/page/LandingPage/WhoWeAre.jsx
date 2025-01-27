@@ -13,18 +13,18 @@ const WhoWeAre = () => {
   const stats = [
     {
       icon: <Users className="w-8 h-8 text-blue-700" />,
-      number: "180+",
+      number: "25+",
       label: "Shore-based professionals",
     },
     {
       icon: <Building2 className="w-8 h-8 text-blue-700" />,
-      number: "8",
+      number: "1",
       label: "Offices in India",
       subtext: "(Mumbai - HQ, Thane, Belapur, New Delhi, Kolkata, Chennai, Visakhapatnam, Kochi)",
     },
     {
       icon: <Ship className="w-8 h-8 text-blue-700" />,
-      number: "4K+",
+      number: "2K+",
       label: "Active Seafarer Pool",
       subtext: "(Conventional, Offshore & Passenger fleet)",
     }
@@ -96,7 +96,7 @@ const WhoWeAre = () => {
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-navy-900 mt-2"
             variants={itemVariants}
           >
-            Providing Maritime Services<br />for Over 20 Years
+            Providing Maritime Services <br/> for over 10 years
           </motion.h2>
         </motion.div>
 
@@ -107,7 +107,7 @@ const WhoWeAre = () => {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          Columbia Aurus Ship Management is a world-class ship management and marine services provider in the maritime industry, managing various types of deep-sea and offshore vessels and other specialised tonnages.
+          RUN MARINE SERVICES PVT.LTD. is a world-class ship management and marine services provider in the maritime industry, managing various types of deep-sea and offshore vessels and other specialised tonnages.
         </motion.p>
 
         {/* Main Content Grid */}
@@ -172,7 +172,7 @@ const WhoWeAre = () => {
             </motion.div>
 
             {/* Floating Stats Box */}
-            <motion.div 
+            {/* <motion.div 
               className="absolute right-4 bottom-4 bg-blue-600 p-6 rounded-lg text-white z-10"
               variants={floatingAnimation}
               animate="float"
@@ -181,7 +181,7 @@ const WhoWeAre = () => {
             >
               <span className="text-4xl font-bold">200+</span>
               <p className="text-lg">Years of Collective Experience</p>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
 

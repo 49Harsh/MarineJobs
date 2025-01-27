@@ -12,7 +12,7 @@ const CareerSection = () => {
 
   const carouselImages = [
     {
-      image: "/ship-2.jpg",
+      image: "/landing-01.jpg",
       title: "Careers on Shore",
       subtitle: "Vacancies",
       heading: "Explore Our Opportunities",
@@ -20,7 +20,7 @@ const CareerSection = () => {
       additionalText: "In case currently there is no role matching your profile please click below to submit a General Application."
     },
     {
-      image: "/boat-1.jpg",
+      image: "/landing-02.jpg",
       title: "Join Our Team",
       subtitle: "Opportunities",
       heading: "Build Your Career With Us",
@@ -28,7 +28,7 @@ const CareerSection = () => {
       additionalText: "We offer competitive packages and continuous professional development opportunities."
     },
     {
-      image: "/ship-3.jpg",
+      image: "/landing-03.jpg",
       title: "Maritime Excellence",
       subtitle: "Positions",
       heading: "Lead the Future of Maritime",
