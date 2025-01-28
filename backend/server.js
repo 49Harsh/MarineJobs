@@ -13,6 +13,7 @@ dotenv.config();
 // Initialize Express App
 const app = express();
 
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -59,7 +60,7 @@ app.use((err, req, res, next) => {
 });
 
 // Backend ke server code mein change karein:
-const path = require('path');
+
 app.use(express.static(path.join(__dirname, 'dist')));  // 'build' ki jagah 'dist'
 
 app.get('*', (req, res) => {
