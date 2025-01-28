@@ -151,7 +151,7 @@ const WhoWeAre = () => {
               transition={{ duration: 0.8 }}
             >
               <img 
-                src="/ship-3.jpg"
+                src="/landing-03.jpg"
                 alt="Port Operations"
                 className="w-full h-full object-cover rounded-lg"
               />
@@ -165,7 +165,7 @@ const WhoWeAre = () => {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <img 
-                src="/ship-2.jpg"
+                src="/landing-01.jpg"
                 alt="Maritime Workers"
                 className="w-full h-full object-cover rounded-lg shadow-lg"
               />
