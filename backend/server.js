@@ -58,6 +58,14 @@ app.use((err, req, res, next) => {
     });
 });
 
+// Backend ke server code mein change karein:
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'dist')));  // 'build' ki jagah 'dist'
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+
 // Start Server
 const PORT = process.env.PORT || 6000;
 app.listen(PORT, () => {
