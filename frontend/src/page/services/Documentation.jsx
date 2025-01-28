@@ -5,7 +5,7 @@ const Documentation = () => {
   const serviceData = {
     title: "Documentation Services",
     description: "Comprehensive maritime documentation services ensuring compliance and efficient vessel operations.",
-    image: "/ship-2.jpg",
+    image: "/landing-03.jpg",
     points: [
       "Vessel certification management",
       "Crew documentation processing",

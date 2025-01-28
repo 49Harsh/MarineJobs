@@ -26,7 +26,7 @@ const About = () => {
               <div className="relative h-full">
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-lg sm:rounded-2xl opacity-20 blur-lg"></div>
                 <img 
-                  src="/ship-2.jpg" 
+                  src="landing-02.jpg" 
                   alt="Maritime Operations" 
                   className="relative rounded-lg sm:rounded-2xl w-full h-full object-cover shadow-xl"
                 />
@@ -53,7 +53,7 @@ const About = () => {
               <div className="relative h-full">
                 <div className="absolute -inset-4 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg sm:rounded-2xl opacity-20 blur-lg"></div>
                 <img 
-                  src="/ship-2.jpg" 
+                  src="/landing-01.jpg" 
                   alt="Our Mission" 
                   className="relative rounded-lg sm:rounded-2xl w-full h-full object-cover shadow-xl"
                 />
@@ -83,7 +83,7 @@ const About = () => {
               <div className="relative h-full">
                 <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg sm:rounded-2xl opacity-20 blur-lg"></div>
                 <img 
-                  src="/ship-2.jpg" 
+                  src="landing-03.jpg" 
                   alt="Our Vision" 
                   className="relative rounded-lg sm:rounded-2xl w-full h-full object-cover shadow-xl"
                 />

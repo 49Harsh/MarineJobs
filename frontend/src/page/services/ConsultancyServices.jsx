@@ -5,7 +5,7 @@ const ConsultancyServices = () => {
   const serviceData = {
     title: "Consultancy Services",
     description: "Expert maritime consultancy services providing strategic guidance and solutions for shipping operations and management.",
-    image: "/ship-2.jpg",
+    image: "/landing-01.jpg",
     points: [
       "Maritime risk assessment and management",
       "Operational efficiency optimization",

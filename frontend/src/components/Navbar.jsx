@@ -115,15 +115,14 @@ const Navbar = () => {
     <nav className="bg-slate-800 shadow-lg relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Logo section */}
-          <div className="flex-shrink-0 flex items-center">
-            <img src="/logo.jpg" alt="logo" className="h-10 w-10 rounded-full mx-4"
+          {/* /* Logo section */}
+                <div className="flex-shrink-0 flex items-center">
+                <img src="/logo.jpg" alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mx-2 sm:mx-4"
+                />
+                <span className="text-white text-xs sm:text-sm lg:text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
+                </div>
 
-            />
-            <span className="text-white text-sm lg:text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
-          </div>
-
-          {/* Desktop menu */}
+                {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
             <button 
               className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
