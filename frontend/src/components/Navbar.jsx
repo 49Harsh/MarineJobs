@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Menu, X, Ship, ChevronDown } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -115,14 +115,13 @@ const Navbar = () => {
     <nav className="bg-slate-800 shadow-lg relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* /* Logo section */}
-                <div className="flex-shrink-0 flex items-center">
-                <img src="/logo.jpg" alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mx-2 sm:mx-4"
-                />
-                <span className="text-white text-xs sm:text-sm lg:text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
-                </div>
+          {/* Logo section */}
+          <div className="flex-shrink-0 flex items-center">
+            <img src="/logo.jpg" alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mx-2 sm:mx-4" />
+            <span className="text-white text-xs sm:text-sm lg:text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
+          </div>
 
-                {/* Desktop menu */}
+          {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-4">
             <button 
               className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
@@ -152,12 +151,14 @@ const Navbar = () => {
                 >
                   <div className="py-1">
                     <button
+                      key="/about" // Unique key
                       className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
                       onClick={() => handleItemClick('/about')}
                     >
                       About Us
                     </button>
                     <button
+                      key="/about-team" // Unique key
                       className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
                       onClick={() => handleItemClick('/about-team')}
                     >
@@ -194,10 +195,10 @@ const Navbar = () => {
                       { title: 'Consultancy Services', path: '/services/consultancy' },
                       { title: 'Commercial Management', path: '/services/commercial-management' },
                       { title: 'Documentation', path: '/services/documentation' },
-                      {/* { title: 'Ship Agency', path: '/services/ship-agency' } */}
+                      { title: 'Ship Agency', path: '/services/ship-agency' }
                     ].map((service) => (
                       <button
-                        key={service.path}
+                        key={service.path} // Unique key
                         className="nav-button block px-4 py-2 text-sm text-white hover:bg-slate-700 w-full text-left"
                         onClick={() => handleItemClick(service.path)}
                       >
@@ -209,13 +210,6 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* <button 
-              className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
-              onClick={() => handleNavigation('/services')}
-            >
-              Services
-            </button> */}
-            
             <button 
               className="text-white hover:bg-slate-700 px-3 py-2 rounded-md text-sm font-medium"
               onClick={() => handleNavigation('/vacanciesui')}
@@ -256,9 +250,7 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1">
               <button
                 className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                onClick={() => {
-                  handleNavigation('/');
-                }}
+                onClick={() => handleNavigation('/')}
               >
                 Home
               </button>
@@ -281,18 +273,16 @@ const Navbar = () => {
                       className="pl-4"
                     >
                       <button
+                        key="/about" // Unique key
                         className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                        onClick={() => {
-                          handleNavigation('/about');
-                        }}
+                        onClick={() => handleNavigation('/about')}
                       >
                         About Us
                       </button>
                       <button
+                        key="/about-team" // Unique key
                         className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                        onClick={() => {
-                          handleNavigation('/about-team');
-                        }}
+                        onClick={() => handleNavigation('/about-team')}
                       >
                         About Team
                       </button>
@@ -327,7 +317,7 @@ const Navbar = () => {
                         { title: 'Ship Agency', path: '/services/ship-agency' }
                       ].map((service) => (
                         <button
-                          key={service.path}
+                          key={service.path} // Unique key
                           className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
                           onClick={() => handleNavigation(service.path)}
                         >
@@ -341,17 +331,13 @@ const Navbar = () => {
 
               <button
                 className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                onClick={() => {
-                  handleNavigation('/vacanciesui');
-                }}
+                onClick={() => handleNavigation('/vacanciesui')}
               >
                 Maritime Vacancies
               </button>
               <button
                 className="text-white hover:bg-slate-700 block px-3 py-2 rounded-md text-base font-medium w-full text-left"
-                onClick={() => {
-                  handleNavigation('/contact');
-                }}
+                onClick={() => handleNavigation('/contact')}
               >
                 Contact Us
               </button>
