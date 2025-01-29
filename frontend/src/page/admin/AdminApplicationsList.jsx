@@ -50,7 +50,9 @@ const AdminApplicationsList = () => {
                         <div className="flex justify-between items-start mb-4">
                             <div>
                                 <h3 className="text-xl font-semibold">{application.fullName}</h3>
-                                <p className="text-gray-600">Applied for: {application.jobId.jobTitle}</p>
+                                <p className="text-gray-600">
+                                    Applied for: {application.jobId?.jobTitle || 'Job title not available'}
+                                </p>
                             </div>
                             <div className="flex items-center gap-4">
                                 <select
