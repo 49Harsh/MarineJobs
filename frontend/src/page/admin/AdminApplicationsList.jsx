@@ -65,7 +65,7 @@ const AdminApplicationsList = () => {
                                 </select>
                                 {application.resumeUrl && (
                                     <a
-                                        href={`http://localhost:5000${application.resumeUrl}`}
+                                        href={`https://marinejobs-1.onrender.com${application.resumeUrl}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="flex items-center gap-2 text-blue-600 hover:text-blue-800"

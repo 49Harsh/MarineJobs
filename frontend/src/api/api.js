@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+// http://localhost:5000/
+// https://marinejobs-1.onrender.com
 const api = axios.create({
     baseURL: 'https://marinejobs-1.onrender.com/api',
     headers: {
