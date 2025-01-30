@@ -195,7 +195,7 @@ const Navbar = () => {
                       { title: 'Consultancy Services', path: '/services/consultancy' },
                       { title: 'Commercial Management', path: '/services/commercial-management' },
                       { title: 'Documentation', path: '/services/documentation' },
-                      { title: 'Ship Agency', path: '/services/ship-agency' }
+                      
                     ].map((service) => (
                       <button
                         key={service.path} // Unique key
@@ -313,8 +313,7 @@ const Navbar = () => {
                         { title: 'Technical Management', path: '/services/technical-management' },
                         { title: 'Consultancy Services', path: '/services/consultancy' },
                         { title: 'Commercial Management', path: '/services/commercial-management' },
-                        { title: 'Documentation', path: '/services/documentation' },
-                        { title: 'Ship Agency', path: '/services/ship-agency' }
+                        { title: 'Documentation', path: '/services/documentation' }
                       ].map((service) => (
                         <button
                           key={service.path} // Unique key

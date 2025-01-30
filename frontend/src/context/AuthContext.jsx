@@ -1,14 +1,13 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAdmin') === 'true');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const login = (username, password) => {
-    // For demo purposes - replace with real authentication
+    // Simple authentication - replace with actual auth logic
     if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('isAdmin', 'true');
       setIsAuthenticated(true);
       return true;
     }
@@ -16,7 +15,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('isAdmin');
     setIsAuthenticated(false);
   };
 

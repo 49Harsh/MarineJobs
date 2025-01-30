@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const AdminLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/admin-login');
+  };
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-gray-100">
@@ -61,7 +69,10 @@ const AdminLayout = () => {
         <header className="bg-white shadow-sm p-4">
           <div className="container mx-auto flex justify-between items-center">
             <h2 className="text-lg md:text-xl font-semibold text-gray-800">Admin Panel</h2>
-            <button className="text-red-500 hover:text-red-700">
+            <button 
+              onClick={handleLogout}
+              className="px-4 py-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-md transition-colors duration-200"
+            >
               Logout
             </button>
           </div>

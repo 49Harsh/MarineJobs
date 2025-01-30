@@ -7,17 +7,17 @@ const AboutTeam = () => {
         {
           name: 'Mr. Nagaraj P. Somasi',
           role: 'Managing Director',
-          image: '#'
+          image: '/free-user.png'
         },
         {
           name: 'Director – Mr. Gauri Shankar',
           role: 'Director',
-          image: '#'
+          image: '/free-user.png'
         },
         {
           name: 'Capt.Sailesh Kumar Singh',
           role: 'Operational Manager ',
-          image: '#'
+          image: '/free-user.png'
         },
        
       ];

@@ -70,7 +70,7 @@ const App = () => {
                   <Route path="/services/consultancy" element={<ConsultancyServices />} />
                   <Route path="/services/commercial-management" element={<CommercialManagement />} />
                   <Route path="/services/documentation" element={<Documentation />} />
-                  <Route path="/services/ship-agency" element={<ShipAgency />} />
+                  {/* <Route path="/services/ship-agency" element={<ShipAgency />} /> */}
               </Routes>
             </ApplicationProvider>
           </JobProvider>
