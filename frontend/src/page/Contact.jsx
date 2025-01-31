@@ -1,38 +1,40 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Phone, Mail } from 'lucide-react';
-import NET from 'vanta/dist/vanta.net.min';
-import * as THREE from 'three';
+import Footer from './LandingPage/Footer';
+// import NET from 'vanta/dist/vanta.net.min';
+// import * as THREE from 'three';
 
 const Contact = () => {
-  const vantaRef = useRef(null);
+//   const vantaRef = useRef(null);
 
-  useEffect(() => {
-    const vantaEffect = NET({
-      el: vantaRef.current,
-      THREE: THREE,
-      mouseControls: true,
-      touchControls: true,
-      gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
-      scale: 1.00,
-      scaleMobile: 1.00,
-      color: 0x3b82f6,
-      backgroundColor: 0xf8fafc,
-      points: 15.00,
-      maxDistance: 25.00,
-      spacing: 16.00
-    });
+//   useEffect(() => {
+//     const vantaEffect = NET({
+//       el: vantaRef.current,
+//       THREE: THREE,
+//       mouseControls: true,
+//       touchControls: true,
+//       gyroControls: false,
+//       minHeight: 200.00,
+//       minWidth: 200.00,
+//       scale: 1.00,
+//       scaleMobile: 1.00,
+//       color: 0x3b82f6,
+//       backgroundColor: 0xf8fafc,
+//       points: 15.00,
+//       maxDistance: 25.00,
+//       spacing: 16.00
+//     });
     
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, []);
+//     return () => {
+//       if (vantaEffect) vantaEffect.destroy();
+//     };
+//   }, []);
 
   return (
-    <div className="relative min-h-screen bg-slate-50">
-      <div ref={vantaRef} className="absolute inset-0" />
+    <div className="relative min-h-full bg-slate-50">
+    {/* ref={vantaRef} */}
+      {/* <div  className="absolute inset-0" /> */}
       
       <div className="relative z-10 container mx-auto px-4 py-16">
         <motion.div
@@ -45,7 +47,7 @@ const Contact = () => {
           <div className="w-24 h-1 bg-blue-500 mx-auto"/>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className=" max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -83,7 +85,7 @@ const Contact = () => {
             </div>
           </motion.div>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -118,9 +120,11 @@ const Contact = () => {
                 Send Message
               </button>
             </form>
-          </motion.div>
+          </motion.div> */}
+          
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
