@@ -24,6 +24,7 @@ import {
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 import AdminLogin from './components/AdminLogin'; // Import AdminLogin
+import Contact from './page/Contact'; // Add this import
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
                 <Route path="/about-team" element={<AboutTeam />} />
                 <Route path="/apply/:jobId" element={<JobApplication />} />
                 <Route path="/admin-login" element={<AdminLogin />} /> {/* Add AdminLogin route */}
+                <Route path="/contact" element={<Contact />} /> {/* Add this route */}
                 
                 {/* Admin Routes - Wrapped with ProtectedRoute */}
                 <Route path="/admin" element={

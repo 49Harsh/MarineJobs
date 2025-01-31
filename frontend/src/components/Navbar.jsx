@@ -223,6 +223,12 @@ const Navbar = () => {
             >
               Contact Us
             </button>
+            <button 
+              className="text-white bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-md text-sm font-medium border border-slate-500 shadow-sm transition-colors duration-200"
+              onClick={() => handleNavigation('/admin-login')}
+            >
+              Company Login
+            </button>
           </div>
 
           {/* Mobile/iPad menu button */}
@@ -339,6 +345,12 @@ const Navbar = () => {
                 onClick={() => handleNavigation('/contact')}
               >
                 Contact Us
+              </button>
+              <button
+                className="text-white bg-slate-700 hover:bg-slate-600 block px-4 py-2 rounded-md text-base font-medium w-full text-left border border-slate-500 shadow-sm transition-colors duration-200"
+                onClick={() => handleNavigation('/admin-login')}
+              >
+                Company Login
               </button>
             </div>
           </motion.div>
