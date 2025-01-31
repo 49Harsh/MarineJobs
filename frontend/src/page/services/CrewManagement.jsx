@@ -35,7 +35,7 @@ const CrewManagement = () => {
       {
         title: "Crew Development & Compliance",
         points: [
-          "STCW95 & 2010 certification verification",
+          // "STCW95 & 2010 certification verification",
           "Professional development programs",
           "Computer-based competency assessments",
           "English proficiency testing",
@@ -88,11 +88,11 @@ const CrewManagement = () => {
       }
     ],
     certifications: [
-      "STCW95 & 2010 Compliance",
+      // "STCW95 & 2010 Compliance",
       "ISO 9001:2015",
-      "MLC 2006",
-      "ISM Code",
-      "ISPS Code"
+      // "MLC 2006",
+      // "ISM Code",
+      // "ISPS Code"
     ]
   };
 
