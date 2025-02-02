@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
 
 // Backend ke server code mein change karein:
 
-app.use(express.static(path.join(__dirname, 'dist')));  // 'build' ki jagah 'dist'
+app.use(express.static(path.join(__dirname, 'dist')));  //  ki jagah 'dist'
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'));

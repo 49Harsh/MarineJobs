@@ -81,3 +81,18 @@ exports.createApplication = async (req, res) => {
         });
     }
 };
+
+exports.deleteApplication = async (req, res) => {
+    try {
+        const application = await Application.findByIdAndDelete(req.params.id);
+        if (!application) {
+            return res.status(404).json({ message: 'Application not found' });
+        }
+        res.json({ message: 'Application deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Error deleting application', 
+            error: error.message 
+        });
+    }
+};
