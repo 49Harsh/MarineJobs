@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../api/api';
-import { FileText, Download, Mail, Phone, Globe } from 'lucide-react';
+import { FileText, Download, Mail, Phone, Globe, Trash2 } from 'lucide-react';
 
 const AdminApplicationsList = () => {
     const { jobId } = useParams();
@@ -19,8 +19,10 @@ const AdminApplicationsList = () => {
                 ? `/admin/jobs/${jobId}/applications`
                 : '/admin/applications';
                 
+            console.log('Fetching from endpoint:', endpoint);
             const response = await api.get(endpoint);
-            setApplications(response.data.applications);
+            console.log('Response:', response.data);
+            setApplications(response.data.applications || []);
             setLoading(false);
         } catch (err) {
             console.error('Error fetching applications:', err);
@@ -38,12 +40,26 @@ const AdminApplicationsList = () => {
         }
     };
 
+    const handleDelete = async (applicationId) => {
+        if (window.confirm('Are you sure you want to delete this application?')) {
+            try {
+                await api.delete(`/applications/${applicationId}`);
+                fetchApplications(); // Refresh the list after deletion
+            } catch (err) {
+                setError('Failed to delete application');
+            }
+        }
+    };
+
     if (loading) return <div className="text-center py-8">Loading applications...</div>;
     if (error) return <div className="text-red-500 text-center py-8">{error}</div>;
+    if (!applications.length) return <div className="text-center py-8">No applications found</div>;
 
     return (
         <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-6">Job Applications</h2>
+            <h2 className="text-2xl font-bold mb-6">
+                Job Applications ({applications.length})
+            </h2>
             <div className="grid gap-6">
                 {applications.map((application) => (
                     <div key={application._id} className="bg-white p-6 rounded-lg shadow-md">
@@ -76,6 +92,13 @@ const AdminApplicationsList = () => {
                                         Resume
                                     </a>
                                 )}
+                                <button
+                                    onClick={() => handleDelete(application._id)}
+                                    className="text-red-600 hover:text-red-800 p-1"
+                                    title="Delete application"
+                                >
+                                    <Trash2 size={20} />
+                                </button>
                             </div>
                         </div>
                         
