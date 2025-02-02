@@ -19,21 +19,20 @@ import {
   ConsultancyServices,
   CommercialManagement,
   Documentation,
-  ShipAgency
 } from './page/services';
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
-import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
-import AdminLogin from './components/AdminLogin'; // Import AdminLogin
-import Contact from './page/Contact'; // Add this import
+import ProtectedRoute from './components/ProtectedRoute'; 
+import { AuthProvider } from './context/AuthContext'; 
+import AdminLogin from './components/AdminLogin'; 
+import Contact from './page/Contact';
 
 const App = () => {
   return (
     <Router basename={'/'}>
-      <AuthProvider> {/* Wrap with AuthProvider */}
+      <AuthProvider>
         <div className="min-h-screen ">
           <Navbar />
-          <JobProvider> {/* Wrap Routes with JobProvider */}
-            <ApplicationProvider> {/* Wrap Routes with ApplicationProvider */}
+          <JobProvider> 
+            <ApplicationProvider> 
               <Routes>
                 {/* Public Routes */}
                 <Route path='/' element={<LandingPages />} />
@@ -41,8 +40,8 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/about-team" element={<AboutTeam />} />
                 <Route path="/apply/:jobId" element={<JobApplication />} />
-                <Route path="/admin-login" element={<AdminLogin />} /> {/* Add AdminLogin route */}
-                <Route path="/contact" element={<Contact />} /> {/* Add this route */}
+                <Route path="/admin-login" element={<AdminLogin />} /> 
+                <Route path="/contact" element={<Contact />} /> 
                 
                 {/* Admin Routes - Wrapped with ProtectedRoute */}
                 <Route path="/admin" element={

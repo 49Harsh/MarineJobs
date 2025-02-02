@@ -12,28 +12,28 @@ const services = [
     title: "Technical Management",
     description: "Operating a vessel efficiently in compliance with environmental, statutory requirements today requires a wide scope of expertise and experience. We endeavour to operate all managed vessels in the safest and most efficient manner possible, aiding our principals to achieve cost economies.",
     image: "/landing-01.jpg",
-    url: "/technical-management"
+    url: "/services/technical-management"
   },
   {
     id: "02",
     title: "Crew Management Services",
     description: "Professional crew management is one of our core activities. We provide fully trained and qualified officers and ratings for all types of vessels including tankers, bulk carriers, and specialized vessels.",
     image: "/ship-2.jpg",
-    url: "/crew-management"
+    url: "/services/crew-management"
   },
   {
     id: "03",
     title: "Marine Consultancy",
     description: "Our experienced team provides comprehensive marine consultancy services including pre-purchase inspections, condition surveys, and operational audits.",
     image: "/landing-02.jpg",
-    url: "/marine-consultancy"
+    url: "/services/consultancy"
   },
   {
     id: "04",
     title: "Safety Management",
     description: "We maintain the highest standards of safety across our fleet through rigorous implementation of safety management systems and regular training.",
     image: "/landing-03.jpg",
-    url: "/#"
+    url: "/services/documentation"
   },
 ];
 
@@ -219,7 +219,7 @@ const ShipManagementSection = () => {
                     <p className="text-gray-600 text-lg mb-6">
                       {service.description}
                     </p>
-                   <Link to="/about">
+                   <Link to={service.url}>
                    <button className="text-orange-500 hover:text-orange-600 font-medium flex items-center gap-2 text-lg transition-colors">
                       Know More
                       <ArrowRight className="w-5 h-5" />
