@@ -31,12 +31,8 @@ const WhoWeAre = () => {
   ];
 
   const certifications = [
-    "IATA Approved",
     "RPSL Approved",
-    "MLC Compliant",
     "ISO 9001 : 2015 Certified",
-    "Document of Compliance (DOC) Holder",
-    "Marlins Approved Test Centre"
   ];
 
   useEffect(() => {

@@ -117,7 +117,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo section */}
           <div className="flex-shrink-0 flex items-center">
-            <img src="/logo.jpg" alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 rounded-full mx-2 sm:mx-4" />
+            <img src="/logo.jpg" alt="logo" className="h-8 w-8 sm:h-10 sm:w-10 object-cover rounded-full mx-2 sm:mx-4" />
             <span className="text-white text-xs sm:text-sm lg:text-xl font-bold">RUN MARINE SERVICES PVT.LTD</span>
           </div>
 
